@@ -30,6 +30,66 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
+  # OpenAI GPT-4o - standard OpenAI model names
+  - model_name: gpt-4o
+    litellm_params:
+      model: github_copilot/gpt-4o
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: github_copilot/gpt-4o-mini
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # OpenAI GPT-4 variants
+  - model_name: gpt-4
+    litellm_params:
+      model: github_copilot/gpt-4o
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: gpt-4-turbo
+    litellm_params:
+      model: github_copilot/gpt-4o
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # OpenAI GPT-3.5
+  - model_name: gpt-3.5-turbo
+    litellm_params:
+      model: github_copilot/gpt-4o-mini
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # OpenAI o1 series
+  - model_name: o1
+    litellm_params:
+      model: github_copilot/o1
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: o1-mini
+    litellm_params:
+      model: github_copilot/o1-mini
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: o1-preview
+    litellm_params:
+      model: github_copilot/o1-preview
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
   # Fallback wildcard patterns
   - model_name: anthropic/*
     litellm_params:
@@ -40,7 +100,7 @@ model_list:
 
   - model_name: openai/*
     litellm_params:
-      model: github_copilot/gpt-5-mini
+      model: github_copilot/gpt-4o
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"

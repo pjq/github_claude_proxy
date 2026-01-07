@@ -102,12 +102,26 @@ All requests will now be routed through LiteLLM to your GitHub Copilot subscript
 The `config.yaml` file contains the model routing configuration. It maps standard Anthropic model names to GitHub Copilot backends:
 
 **Supported model names:**
+
+**Claude Models:**
 - `claude-sonnet-4.5` → GitHub Copilot's Claude Sonnet 4.5
 - `claude-4.5-sonnet` → GitHub Copilot's Claude Sonnet 4.5
 - `anthropic--claude-4.5-sonnet` → GitHub Copilot's Claude Sonnet 4.5
 - `claude-haiku-4.5` → GitHub Copilot's GPT-5 Mini (for faster operations)
-- `anthropic/*` (wildcard) → GitHub Copilot's Claude Sonnet 4.5
-- `openai/*` (wildcard) → GitHub Copilot's GPT-5 Mini
+
+**OpenAI Models:**
+- `gpt-4o` → GitHub Copilot's GPT-4o
+- `gpt-4o-mini` → GitHub Copilot's GPT-4o Mini
+- `gpt-4` → GitHub Copilot's GPT-4o
+- `gpt-4-turbo` → GitHub Copilot's GPT-4o
+- `gpt-3.5-turbo` → GitHub Copilot's GPT-4o Mini
+- `o1` → GitHub Copilot's o1
+- `o1-mini` → GitHub Copilot's o1-mini
+- `o1-preview` → GitHub Copilot's o1-preview
+
+**Wildcards:**
+- `anthropic/*` → GitHub Copilot's Claude Sonnet 4.5
+- `openai/*` → GitHub Copilot's GPT-4o
 
 The `extra_headers` are required by GitHub Copilot API for proper authentication.
 
