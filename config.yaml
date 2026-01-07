@@ -81,14 +81,6 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # Legacy GPT-3.5 names (mapped to GPT-5)
-  - model_name: gpt-3.5-turbo
-    litellm_params:
-      model: github_copilot/gpt-5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
   # OpenAI o1 series
   - model_name: o1
     litellm_params:

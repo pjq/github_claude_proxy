@@ -117,7 +117,6 @@ The `config.yaml` file contains the model routing configuration. It maps standar
 - `gpt-4` → GitHub Copilot's GPT-5 (legacy mapping)
 - `gpt-4o` → GitHub Copilot's GPT-5 (legacy mapping)
 - `gpt-4-turbo` → GitHub Copilot's GPT-5.1 (legacy mapping)
-- `gpt-3.5-turbo` → GitHub Copilot's GPT-5 (legacy mapping)
 - `o1` → GitHub Copilot's o1
 - `o1-mini` → GitHub Copilot's o1-mini
 - `o1-preview` → GitHub Copilot's o1-preview
