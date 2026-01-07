@@ -1,0 +1,55 @@
+model_list:
+  # Claude Sonnet 4.5 - standard Anthropic model name
+  - model_name: claude-sonnet-4.5
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Alternative names for Claude Sonnet 4.5
+  - model_name: anthropic--claude-4.5-sonnet
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: claude-4.5-sonnet
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Claude Haiku 4.5 - for faster operations
+  - model_name: claude-haiku-4.5
+    litellm_params:
+      model: github_copilot/gpt-5-mini
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Fallback wildcard patterns
+  - model_name: anthropic/*
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: openai/*
+    litellm_params:
+      model: github_copilot/gpt-5-mini
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+# General settings
+general_settings:
+  master_key: your-anthropic-api-key-here
+
+# Optional: Enable logging for debugging
+litellm_settings:
+  drop_params: True
+  set_verbose: False
