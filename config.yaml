@@ -30,40 +30,61 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # OpenAI GPT-4o - standard OpenAI model names
-  - model_name: gpt-4o
+  # OpenAI GPT-5 series - current GitHub Copilot models
+  - model_name: gpt-5
     litellm_params:
-      model: github_copilot/gpt-4o
+      model: github_copilot/gpt-5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  - model_name: gpt-4o-mini
+  - model_name: gpt-5.1
     litellm_params:
-      model: github_copilot/gpt-4o-mini
+      model: github_copilot/gpt-5.1
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # OpenAI GPT-4 variants
+  - model_name: gpt-5.2
+    litellm_params:
+      model: github_copilot/gpt-5.2
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: gpt-5.1-codex
+    litellm_params:
+      model: github_copilot/gpt-5.1-codex
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Legacy GPT-4 names (mapped to GPT-5)
   - model_name: gpt-4
     litellm_params:
-      model: github_copilot/gpt-4o
+      model: github_copilot/gpt-5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: gpt-4o
+    litellm_params:
+      model: github_copilot/gpt-5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
   - model_name: gpt-4-turbo
     litellm_params:
-      model: github_copilot/gpt-4o
+      model: github_copilot/gpt-5.1
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # OpenAI GPT-3.5
+  # Legacy GPT-3.5 names (mapped to GPT-5)
   - model_name: gpt-3.5-turbo
     litellm_params:
-      model: github_copilot/gpt-4o-mini
+      model: github_copilot/gpt-5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
@@ -100,7 +121,7 @@ model_list:
 
   - model_name: openai/*
     litellm_params:
-      model: github_copilot/gpt-4o
+      model: github_copilot/gpt-5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"

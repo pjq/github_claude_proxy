@@ -110,18 +110,21 @@ The `config.yaml` file contains the model routing configuration. It maps standar
 - `claude-haiku-4.5` → GitHub Copilot's GPT-5 Mini (for faster operations)
 
 **OpenAI Models:**
-- `gpt-4o` → GitHub Copilot's GPT-4o
-- `gpt-4o-mini` → GitHub Copilot's GPT-4o Mini
-- `gpt-4` → GitHub Copilot's GPT-4o
-- `gpt-4-turbo` → GitHub Copilot's GPT-4o
-- `gpt-3.5-turbo` → GitHub Copilot's GPT-4o Mini
+- `gpt-5` → GitHub Copilot's GPT-5
+- `gpt-5.1` → GitHub Copilot's GPT-5.1
+- `gpt-5.2` → GitHub Copilot's GPT-5.2
+- `gpt-5.1-codex` → GitHub Copilot's GPT-5.1 Codex
+- `gpt-4` → GitHub Copilot's GPT-5 (legacy mapping)
+- `gpt-4o` → GitHub Copilot's GPT-5 (legacy mapping)
+- `gpt-4-turbo` → GitHub Copilot's GPT-5.1 (legacy mapping)
+- `gpt-3.5-turbo` → GitHub Copilot's GPT-5 (legacy mapping)
 - `o1` → GitHub Copilot's o1
 - `o1-mini` → GitHub Copilot's o1-mini
 - `o1-preview` → GitHub Copilot's o1-preview
 
 **Wildcards:**
 - `anthropic/*` → GitHub Copilot's Claude Sonnet 4.5
-- `openai/*` → GitHub Copilot's GPT-4o
+- `openai/*` → GitHub Copilot's GPT-5
 
 The `extra_headers` are required by GitHub Copilot API for proper authentication.
 
