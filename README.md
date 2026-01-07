@@ -2,6 +2,8 @@
 
 This repository contains the configuration to use GitHub Copilot's LLM API as a backend for Claude Code, allowing you to use your GitHub Copilot subscription instead of a separate Claude API subscription.
 
+**Based on:** [Using Claude Code with GitHub Copilot Subscription](https://dev.to/allentcm/using-claude-code-with-github-copilot-subscription-2obj) by Allen T.
+
 ## Prerequisites
 
 - GitHub Copilot subscription
