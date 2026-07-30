@@ -1,37 +1,101 @@
 model_list:
-  # ─── Claude-named entries ───────────────────────────────────────────────
-  # GitHub Copilot no longer exposes any claude-* backend models, so these
-  # Claude aliases (used by Claude Code) map to the strongest current backend.
+  # ─── Claude models (real GitHub Copilot backends, available over VPN) ────
   - model_name: claude-sonnet-4.5
     litellm_params:
-      model: github_copilot/gpt-5.6-sol
+      model: github_copilot/claude-sonnet-4.5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
   - model_name: anthropic--claude-4.5-sonnet
     litellm_params:
-      model: github_copilot/gpt-5.6-sol
+      model: github_copilot/claude-sonnet-4.5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
   - model_name: claude-4.5-sonnet
     litellm_params:
-      model: github_copilot/gpt-5.6-sol
+      model: github_copilot/claude-sonnet-4.5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # Haiku-tier (faster/cheaper) -> gpt-5.4-mini
+  - model_name: claude-sonnet-4.6
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.6
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: claude-sonnet-5
+    litellm_params:
+      model: github_copilot/claude-sonnet-5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Opus tier
+  - model_name: claude-opus-4.8
+    litellm_params:
+      model: github_copilot/claude-opus-4.8
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Claude Code sends the Opus id with hyphens (claude-opus-4-8)
+  - model_name: claude-opus-4-8
+    litellm_params:
+      model: github_copilot/claude-opus-4.8
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: claude-opus-4.8-fast
+    litellm_params:
+      model: github_copilot/claude-opus-4.8-fast
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: claude-opus-4.7
+    litellm_params:
+      model: github_copilot/claude-opus-4.7
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: claude-opus-4.5
+    litellm_params:
+      model: github_copilot/claude-opus-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: claude-opus-5
+    litellm_params:
+      model: github_copilot/claude-opus-5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Haiku tier (faster/cheaper)
   - model_name: claude-haiku-4.5
     litellm_params:
-      model: github_copilot/gpt-5.4-mini
+      model: github_copilot/claude-haiku-4.5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # ─── OpenAI GPT-5.x series (current GitHub Copilot models) ──────────────
+  # Fable
+  - model_name: claude-fable-5
+    litellm_params:
+      model: github_copilot/claude-fable-5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # ─── OpenAI GPT-5.x series ──────────────────────────────────────────────
   - model_name: gpt-5.6-sol
     litellm_params:
       model: github_copilot/gpt-5.6-sol
@@ -110,6 +174,13 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
+  - model_name: gemini-3-flash-preview
+    litellm_params:
+      model: github_copilot/gemini-3-flash-preview
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
   - model_name: gemini-2.5-pro
     litellm_params:
       model: github_copilot/gemini-2.5-pro
@@ -117,10 +188,17 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # ─── xAI Grok ───────────────────────────────────────────────────────────
+  # ─── Other ──────────────────────────────────────────────────────────────
   - model_name: grok-4.5
     litellm_params:
       model: github_copilot/grok-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: kimi-k2.7-code
+    litellm_params:
+      model: github_copilot/kimi-k2.7-code
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
@@ -150,7 +228,7 @@ model_list:
   # ─── Fallback wildcard patterns ─────────────────────────────────────────
   - model_name: anthropic/*
     litellm_params:
-      model: github_copilot/gpt-5.6-sol
+      model: github_copilot/claude-sonnet-4.5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"

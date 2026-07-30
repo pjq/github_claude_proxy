@@ -113,7 +113,7 @@ All requests will now be routed through LiteLLM to your GitHub Copilot subscript
 
 The `config.yaml` file contains the model routing configuration. It maps friendly model names to GitHub Copilot backends.
 
-> **Important:** GitHub Copilot's backend catalog changes over time. As of the last update, Copilot **no longer exposes any `claude-*` backend model**, so the Claude-named aliases below are routed to the strongest available GPT backend. Despite the repo's name, Claude Code requests are served by a GPT model.
+> **Important:** GitHub Copilot's backend catalog changes over time and is **network-gated** — the Claude / Kimi backends are only visible when connected to the corporate **VPN**. Off-VPN, `/models` returns a reduced list (GPT / Gemini / Grok only) and any request to a hidden backend fails with a connection error. Connect the VPN before starting the proxy for Claude models.
 >
 > To see the models Copilot currently offers for your account, query the live endpoint once the proxy has authenticated:
 > ```bash
@@ -123,15 +123,17 @@ The `config.yaml` file contains the model routing configuration. It maps friendl
 >   -H "Copilot-Integration-Id: vscode-chat" \
 >   -H "editor-version: vscode/1.85.1" | python3 -m json.tool
 > ```
-> Then update `config.yaml` to point at whatever backend IDs are returned.
+> If a backend ID you rely on isn't listed, update `config.yaml` to point at one that is.
 
 **Supported model names:**
 
-**Claude aliases** (used by Claude Code; routed to a GPT backend):
-- `claude-sonnet-4.5` → `gpt-5.6-sol`
-- `claude-4.5-sonnet` → `gpt-5.6-sol`
-- `anthropic--claude-4.5-sonnet` → `gpt-5.6-sol`
-- `claude-haiku-4.5` → `gpt-5.4-mini` (faster/cheaper tier)
+**Claude** (real Copilot backends — require VPN):
+- `claude-opus-4.8`, `claude-opus-4-8` (hyphen form Claude Code sends) → `claude-opus-4.8`
+- `claude-opus-4.8-fast`, `claude-opus-4.7`, `claude-opus-4.5`, `claude-opus-5`
+- `claude-sonnet-4.5`, `claude-4.5-sonnet`, `anthropic--claude-4.5-sonnet` → `claude-sonnet-4.5`
+- `claude-sonnet-4.6`, `claude-sonnet-5`
+- `claude-haiku-4.5` (faster/cheaper tier)
+- `claude-fable-5`
 
 **OpenAI GPT-5.x:**
 - `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`
@@ -140,13 +142,14 @@ The `config.yaml` file contains the model routing configuration. It maps friendl
 - `gpt-4`, `gpt-4o`, `gpt-4-turbo` → `gpt-5.5` (legacy aliases)
 
 **Google Gemini:**
-- `gemini-3.6-flash`, `gemini-3.5-flash`, `gemini-3.1-pro-preview`, `gemini-2.5-pro`
+- `gemini-3.6-flash`, `gemini-3.5-flash`, `gemini-3.1-pro-preview`, `gemini-3-flash-preview`, `gemini-2.5-pro`
 
-**xAI Grok:**
+**Other:**
 - `grok-4.5`
+- `kimi-k2.7-code` (requires VPN)
 
 **Wildcards:**
-- `anthropic/*` → `gpt-5.6-sol`
+- `anthropic/*` → `claude-sonnet-4.5`
 - `openai/*` → `gpt-5.5`
 
 The `extra_headers` are required by the GitHub Copilot API for proper authentication.

@@ -22,7 +22,7 @@ When editing model mappings, **change both `config.yaml` and `config.local.yaml`
 ## Key facts / gotchas
 
 - **macOS + Homebrew Python ⇒ PEP 668.** System-wide `pip install` fails with `externally-managed-environment`. That's why `start-proxy.sh` uses a `.venv`. Don't revert it to a bare `pip install`.
-- **The Copilot model catalog is volatile and NOT Claude.** Copilot periodically renames/removes backends, and currently exposes **no `claude-*` models**. Never assume a model ID — query the live list first:
+- **The Copilot model catalog is volatile AND VPN-gated.** Copilot periodically renames/removes backends, and the catalog differs by network: **on corporate VPN the `claude-*` and `kimi-*` backends are visible; off-VPN they disappear** (only GPT / Gemini / Grok remain) and requests to a hidden backend fail with a connection-error 500. Never assume a model ID — query the live list first (VPN on if you want Claude):
   ```bash
   API_KEY=$(python3 -c "import json;print(json.load(open('$HOME/.config/litellm/github_copilot/api-key.json'))['token'])")
   curl -s https://api.githubcopilot.com/models \
@@ -31,7 +31,7 @@ When editing model mappings, **change both `config.yaml` and `config.local.yaml`
     -H "editor-version: vscode/1.85.1" | python3 -m json.tool
   ```
   The `litellm_params.model` values (after the `github_copilot/` prefix) MUST be IDs from that list, or requests fail. The left-hand `model_name` is a free alias.
-- **Claude aliases are routed to a GPT backend** (currently `gpt-5.6-sol`; Haiku-tier → `gpt-5.4-mini`) precisely because no Claude backend exists. Update these when the catalog changes.
+- **Claude aliases now route to real Claude backends** (VPN required): `claude-opus-4.8`/`claude-opus-4-8` → `claude-opus-4.8`, sonnet aliases → `claude-sonnet-4.5`, `claude-haiku-4.5` → `claude-haiku-4.5`, `anthropic/*` → `claude-sonnet-4.5`. (Historically, when off-VPN showed no Claude backend, these were temporarily pointed at `gpt-5.6-sol`.) Update these when the catalog changes.
 - **Auth returns 500, not 401,** on a missing/bad key because the proxy runs without the optional `prisma` DB layer. Harmless — a valid `master_key` works fine.
 - **`extra_headers`** (`editor-version`, `Copilot-Integration-Id: vscode-chat`) are required on every entry for Copilot auth.
 
