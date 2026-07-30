@@ -8,6 +8,16 @@ set -e
 echo "🚀 Starting GitHub Copilot Proxy for Claude Code..."
 echo ""
 
+# Set up a virtual environment so we don't touch the system (Homebrew) Python
+VENV_DIR=".venv"
+if [ ! -d "$VENV_DIR" ]; then
+    echo "📦 Creating virtual environment in $VENV_DIR..."
+    python3 -m venv "$VENV_DIR"
+fi
+
+# Activate the virtual environment
+source "$VENV_DIR/bin/activate"
+
 # Check if litellm is installed
 if ! command -v litellm &> /dev/null; then
     echo "❌ LiteLLM is not installed."
