@@ -1,120 +1,11 @@
 model_list:
-  # ─── Claude models (real GitHub Copilot backends, available over VPN) ────
-  - model_name: claude-sonnet-4.5
-    litellm_params:
-      model: github_copilot/claude-sonnet-4.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: anthropic--claude-4.5-sonnet
-    litellm_params:
-      model: github_copilot/claude-sonnet-4.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-4.5-sonnet
-    litellm_params:
-      model: github_copilot/claude-sonnet-4.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-sonnet-4.6
-    litellm_params:
-      model: github_copilot/claude-sonnet-4.6
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-sonnet-5
-    litellm_params:
-      model: github_copilot/claude-sonnet-5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
+  # ─── Claude models — SAP AI Core naming (anthropic--claude-<version>-<tier>) ─
+  # Real GitHub Copilot Claude backends (require VPN). Claude Code's own
+  # claude-* ids fall through to the anthropic/* wildcard below.
   # Opus tier
-  - model_name: claude-opus-4.8
-    litellm_params:
-      model: github_copilot/claude-opus-4.8
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  # Claude Code sends the Opus id with hyphens (claude-opus-4-8)
-  - model_name: claude-opus-4-8
-    litellm_params:
-      model: github_copilot/claude-opus-4.8
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  # SAP AI Core naming style
   - model_name: anthropic--claude-4.8-opus
     litellm_params:
       model: github_copilot/claude-opus-4.8
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-opus-4.8-fast
-    litellm_params:
-      model: github_copilot/claude-opus-4.8-fast
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-opus-4.7
-    litellm_params:
-      model: github_copilot/claude-opus-4.7
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-opus-4.5
-    litellm_params:
-      model: github_copilot/claude-opus-4.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: claude-opus-5
-    litellm_params:
-      model: github_copilot/claude-opus-5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  # Haiku tier (faster/cheaper)
-  - model_name: claude-haiku-4.5
-    litellm_params:
-      model: github_copilot/claude-haiku-4.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  # Fable
-  - model_name: claude-fable-5
-    litellm_params:
-      model: github_copilot/claude-fable-5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-
-  # ─── SAP AI Core naming aliases (anthropic--claude-<version>-<tier>) ─────
-  - model_name: anthropic--claude-4.6-sonnet
-    litellm_params:
-      model: github_copilot/claude-sonnet-4.6
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: anthropic--claude-5-sonnet
-    litellm_params:
-      model: github_copilot/claude-sonnet-5
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
@@ -147,6 +38,29 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
+  # Sonnet tier
+  - model_name: anthropic--claude-4.5-sonnet
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: anthropic--claude-4.6-sonnet
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.6
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: anthropic--claude-5-sonnet
+    litellm_params:
+      model: github_copilot/claude-sonnet-5
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # Haiku tier (faster/cheaper)
   - model_name: anthropic--claude-4.5-haiku
     litellm_params:
       model: github_copilot/claude-haiku-4.5
@@ -154,6 +68,7 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
+  # Fable
   - model_name: anthropic--claude-5-fable
     litellm_params:
       model: github_copilot/claude-fable-5

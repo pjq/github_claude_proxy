@@ -77,8 +77,8 @@ Add these to your `~/.zshrc`:
 ```bash
 export ANTHROPIC_BASE_URL="http://127.0.0.1:4000"
 export ANTHROPIC_AUTH_TOKEN="your-anthropic-api-key-here"
-export ANTHROPIC_MODEL="claude-sonnet-4.5"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="claude-haiku-4.5"
+export ANTHROPIC_MODEL="anthropic--claude-4.8-opus"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic--claude-4.5-haiku"
 export DISABLE_NON_ESSENTIAL_MODEL_CALLS="1"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 ```
@@ -127,19 +127,13 @@ The `config.yaml` file contains the model routing configuration. It maps friendl
 
 **Supported model names:**
 
-**Claude** (real Copilot backends — require VPN):
-- `claude-opus-4.8`, `claude-opus-4-8` (hyphen form Claude Code sends) → `claude-opus-4.8`
-- `claude-opus-4.8-fast`, `claude-opus-4.7`, `claude-opus-4.5`, `claude-opus-5`
-- `claude-sonnet-4.5`, `claude-4.5-sonnet` → `claude-sonnet-4.5`
-- `claude-sonnet-4.6`, `claude-sonnet-5`
-- `claude-haiku-4.5` (faster/cheaper tier)
-- `claude-fable-5`
+**Claude** — SAP AI Core naming convention `anthropic--claude-<version>-<tier>` (real Copilot backends, require VPN):
+- **Opus:** `anthropic--claude-4.8-opus` → `claude-opus-4.8`; also `anthropic--claude-4.8-opus-fast`, `anthropic--claude-4.7-opus`, `anthropic--claude-4.5-opus`, `anthropic--claude-5-opus`
+- **Sonnet:** `anthropic--claude-4.5-sonnet`, `anthropic--claude-4.6-sonnet`, `anthropic--claude-5-sonnet`
+- **Haiku:** `anthropic--claude-4.5-haiku` (faster/cheaper tier)
+- **Fable:** `anthropic--claude-5-fable`
 
-**SAP AI Core naming aliases** (`anthropic--claude-<version>-<tier>`, same backends as above):
-- `anthropic--claude-4.8-opus`, `anthropic--claude-4.8-opus-fast`, `anthropic--claude-4.7-opus`, `anthropic--claude-4.5-opus`, `anthropic--claude-5-opus`
-- `anthropic--claude-4.5-sonnet`, `anthropic--claude-4.6-sonnet`, `anthropic--claude-5-sonnet`
-- `anthropic--claude-4.5-haiku`
-- `anthropic--claude-5-fable`
+> Only the `anthropic--claude-*` names are registered for Anthropic models. Claude Code's own `claude-*` ids are not listed individually — they resolve through the `anthropic/*` wildcard (→ `claude-sonnet-4.5`).
 
 **OpenAI GPT-5.x:**
 - `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`
@@ -167,8 +161,8 @@ Alternatively, you can set these as environment variables instead of using setti
 ```bash
 export ANTHROPIC_BASE_URL="http://127.0.0.1:4000"
 export ANTHROPIC_AUTH_TOKEN="your-anthropic-api-key-here"
-export ANTHROPIC_MODEL="claude-sonnet-4.5"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="claude-haiku-4.5"
+export ANTHROPIC_MODEL="anthropic--claude-4.8-opus"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic--claude-4.5-haiku"
 export DISABLE_NON_ESSENTIAL_MODEL_CALLS="1"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 ```
@@ -176,8 +170,8 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 **Environment Variable Details:**
 - `ANTHROPIC_BASE_URL`: Points to the local LiteLLM proxy (use 127.0.0.1 or localhost)
 - `ANTHROPIC_AUTH_TOKEN`: Dummy token (auth is disabled for local use, but Claude Code requires a value)
-- `ANTHROPIC_MODEL`: Primary model to use (`claude-sonnet-4.5`, routed to `gpt-5.6-sol`)
-- `ANTHROPIC_DEFAULT_HAIKU_MODEL`: Faster model for simple operations (`claude-haiku-4.5`, routed to `gpt-5.4-mini`)
+- `ANTHROPIC_MODEL`: Primary model to use (`anthropic--claude-4.8-opus`, routed to `claude-opus-4.8`)
+- `ANTHROPIC_DEFAULT_HAIKU_MODEL`: Faster model for simple operations (`anthropic--claude-4.5-haiku`, routed to `claude-haiku-4.5`)
 - `DISABLE_NON_ESSENTIAL_MODEL_CALLS`: Reduces unnecessary API calls
 - `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`: Further optimizes traffic
 
