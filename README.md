@@ -6,6 +6,8 @@ This repository contains the configuration to use GitHub Copilot's LLM API as a 
 
 It also exposes a standard **OpenAI-compatible API** (`/v1/models`, `/v1/chat/completions`), so the same proxy can back OpenAI-compatible tools such as **Codex** and **Pi** — see [Using with OpenAI-compatible tools](#using-with-openai-compatible-tools-codex--pi).
 
+> **Model choice:** Claude Code will most often use the Anthropic (Claude) models, but it can also run on the OpenAI models exposed here — e.g. set `ANTHROPIC_MODEL="gpt-5.5"` and Claude Code drives GPT-5.5 through the proxy (litellm bridges it onto Copilot's Responses API). Which models are actually available depends on your Copilot login — see [Supported model names](#configyaml).
+
 ## Prerequisites
 
 - GitHub Copilot subscription
