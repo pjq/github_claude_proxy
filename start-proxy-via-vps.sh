@@ -40,9 +40,8 @@ if ! command -v litellm &> /dev/null; then
 fi
 
 # Pick config
-if [ -f "config.local.yaml" ]; then CONFIG_FILE="config.local.yaml"
-elif [ -f "config.yaml" ]; then CONFIG_FILE="config.yaml"
-else echo "❌ No config file found"; exit 1; fi
+if [ -f "config.yaml" ]; then CONFIG_FILE="config.yaml"
+else echo "❌ config.yaml not found — copy it: cp config.example.yaml config.yaml"; exit 1; fi
 
 SSH_PID=""; BRIDGE_PID=""
 cleanup() {

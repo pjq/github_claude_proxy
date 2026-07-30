@@ -11,13 +11,15 @@ There is almost no code here — the repo is the two YAML configs plus a start s
 
 ## Files
 
-- `config.yaml` — committed template. `master_key` is the placeholder `your-anthropic-api-key-here`.
-- `config.local.yaml` — **gitignored**, holds the real `master_key`. `start-proxy.sh` prefers it over `config.yaml`.
-- `start-proxy.sh` — creates/activates `.venv/`, installs `litellm[proxy]` if missing, then runs `litellm --config <config>` on `0.0.0.0:4000`.
+- `config.example.yaml` — committed template. `master_key` is the placeholder `your-anthropic-api-key-here`.
+- `config.yaml` — **gitignored**, the live config holding the real `master_key`. Created via `cp config.example.yaml config.yaml`. `start-proxy.sh` uses it.
+- `proxy_logging.py` — litellm CustomLogger callback (per-request/failure diagnostics), wired via `litellm_settings.callbacks`. Start scripts set `PYTHONPATH=.` so it imports.
+- `start-proxy.sh` — creates/activates `.venv/`, installs `litellm[proxy]` if missing, then runs `litellm --config config.yaml` on `0.0.0.0:4000`.
+- `start-proxy-via-vps.sh` — same but tunnels outbound through an SSH SOCKS proxy to a VPS (bypasses SAP SNI block for the personal Copilot endpoint).
 - `claude-settings-example.json` — sample `~/.claude/settings.json`.
 - `.venv/` — gitignored local virtualenv.
 
-When editing model mappings, **change both `config.yaml` and `config.local.yaml`** and keep each file's own `master_key`. They should otherwise be identical.
+When editing model mappings, edit `config.yaml` (live). Keep `config.example.yaml` in sync structurally (same models, placeholder key) so the committed template stays accurate.
 
 ## Key facts / gotchas
 

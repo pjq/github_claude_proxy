@@ -32,14 +32,15 @@ pip install 'litellm[proxy]'
 
 ### Step 2: Create Local Configuration
 
-Create a `config.local.yaml` file with your API key:
+Copy the template to `config.yaml` and add your API key:
 
 ```bash
-cp config.yaml config.local.yaml
-# Edit config.local.yaml and replace "your-anthropic-api-key-here" with your actual token
+cp config.example.yaml config.yaml
+# Edit config.yaml and replace "your-anthropic-api-key-here" with your actual token
 ```
 
-**Note:** `config.local.yaml` is gitignored and won't be committed to version control.
+**Note:** `config.yaml` is gitignored and won't be committed. The committed
+template is `config.example.yaml` (placeholder key only).
 
 ### Step 3: Start the Proxy Server
 
@@ -49,7 +50,7 @@ From this directory, run:
 ./start-proxy.sh
 ```
 
-The script automatically uses `config.local.yaml` if it exists, otherwise falls back to `config.yaml`.
+The script uses `config.yaml` (your live config; copy it from `config.example.yaml` first — see Step 2).
 
 The proxy will start on `http://0.0.0.0:4000`.
 

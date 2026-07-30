@@ -28,15 +28,14 @@ if ! command -v litellm &> /dev/null; then
 fi
 
 # Determine which config file to use
-if [ -f "config.local.yaml" ]; then
-    CONFIG_FILE="config.local.yaml"
-    echo "📋 Using local configuration: config.local.yaml"
-elif [ -f "config.yaml" ]; then
+if [ -f "config.yaml" ]; then
     CONFIG_FILE="config.yaml"
-    echo "📋 Using default configuration: config.yaml"
+    echo "📋 Using configuration: config.yaml"
 else
-    echo "❌ No config file found (config.yaml or config.local.yaml)"
-    echo "Please run this script from the repository root"
+    echo "❌ config.yaml not found."
+    echo "   Copy the template and add your key:"
+    echo "     cp config.example.yaml config.yaml"
+    echo "   then edit config.yaml (replace the master_key placeholder)."
     exit 1
 fi
 
