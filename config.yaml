@@ -76,56 +76,36 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # ─── OpenAI GPT-5.x series ──────────────────────────────────────────────
-  - model_name: gpt-5.6-sol
-    litellm_params:
-      model: github_copilot/gpt-5.6-sol
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: gpt-5.6-luna
-    litellm_params:
-      model: github_copilot/gpt-5.6-luna
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
-  - model_name: gpt-5.6-terra
-    litellm_params:
-      model: github_copilot/gpt-5.6-terra
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
-
+  # ─── OpenAI GPT-5.x ──────────────────────────────────────────────────────
+  # gpt-5.5/5.4/5.4-mini/5.3-codex are Responses-API only on this Copilot seat.
+  # model_info mode:responses makes litellm dispatch to /responses. Do NOT add
+  # extra_headers — they collide with litellm's default copilot-integration-id
+  # and cause a 400. (gpt-5.6-sol/luna/terra are not served here and were removed.)
   - model_name: gpt-5.5
     litellm_params:
       model: github_copilot/gpt-5.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
+    model_info:
+      mode: responses
 
   - model_name: gpt-5.4
     litellm_params:
       model: github_copilot/gpt-5.4
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
+    model_info:
+      mode: responses
 
   - model_name: gpt-5.4-mini
     litellm_params:
       model: github_copilot/gpt-5.4-mini
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
+    model_info:
+      mode: responses
 
   - model_name: gpt-5.3-codex
     litellm_params:
       model: github_copilot/gpt-5.3-codex
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
+    model_info:
+      mode: responses
 
+  # gpt-5-mini works via both chat/completions and responses (chat is fine)
   - model_name: gpt-5-mini
     litellm_params:
       model: github_copilot/gpt-5-mini
