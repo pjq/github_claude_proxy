@@ -130,10 +130,16 @@ The `config.yaml` file contains the model routing configuration. It maps friendl
 **Claude** (real Copilot backends — require VPN):
 - `claude-opus-4.8`, `claude-opus-4-8` (hyphen form Claude Code sends) → `claude-opus-4.8`
 - `claude-opus-4.8-fast`, `claude-opus-4.7`, `claude-opus-4.5`, `claude-opus-5`
-- `claude-sonnet-4.5`, `claude-4.5-sonnet`, `anthropic--claude-4.5-sonnet` → `claude-sonnet-4.5`
+- `claude-sonnet-4.5`, `claude-4.5-sonnet` → `claude-sonnet-4.5`
 - `claude-sonnet-4.6`, `claude-sonnet-5`
 - `claude-haiku-4.5` (faster/cheaper tier)
 - `claude-fable-5`
+
+**SAP AI Core naming aliases** (`anthropic--claude-<version>-<tier>`, same backends as above):
+- `anthropic--claude-4.8-opus`, `anthropic--claude-4.8-opus-fast`, `anthropic--claude-4.7-opus`, `anthropic--claude-4.5-opus`, `anthropic--claude-5-opus`
+- `anthropic--claude-4.5-sonnet`, `anthropic--claude-4.6-sonnet`, `anthropic--claude-5-sonnet`
+- `anthropic--claude-4.5-haiku`
+- `anthropic--claude-5-fable`
 
 **OpenAI GPT-5.x:**
 - `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`
