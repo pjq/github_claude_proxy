@@ -84,4 +84,5 @@ echo ""
 echo "Note: First time? Follow the device authentication prompt to connect GitHub Copilot"
 echo ""
 
-litellm --config "$CONFIG_FILE" --host "$HOST" --port "$PORT"
+# PYTHONPATH=. lets litellm import the proxy_logging callback from this dir
+PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}." litellm --config "$CONFIG_FILE" --host "$HOST" --port "$PORT"

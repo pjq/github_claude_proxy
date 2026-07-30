@@ -209,3 +209,6 @@ general_settings:
 litellm_settings:
   drop_params: True
   set_verbose: False
+  # Per-request diagnostics (model, api_base, integration-id headers, failures).
+  # Requires proxy_logging.py in the proxy working dir. Remove to disable.
+  callbacks: proxy_logging.copilot_logger

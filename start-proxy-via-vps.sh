@@ -84,4 +84,5 @@ export HTTPS_PROXY="http://127.0.0.1:$BRIDGE_PORT"
 export HTTP_PROXY="http://127.0.0.1:$BRIDGE_PORT"
 export NO_PROXY="127.0.0.1,localhost"
 
-litellm --config "$CONFIG_FILE" --host "$HOST" --port "$PORT"
+# PYTHONPATH=. lets litellm import the proxy_logging callback from this dir
+PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}." litellm --config "$CONFIG_FILE" --host "$HOST" --port "$PORT"

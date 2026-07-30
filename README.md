@@ -77,8 +77,8 @@ Add these to your `~/.zshrc`:
 ```bash
 export ANTHROPIC_BASE_URL="http://127.0.0.1:4000"
 export ANTHROPIC_AUTH_TOKEN="your-anthropic-api-key-here"
-export ANTHROPIC_MODEL="anthropic--claude-4.8-opus"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic--claude-4.5-haiku"
+export ANTHROPIC_MODEL="gpt-5.5"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="gpt-5-mini"
 export DISABLE_NON_ESSENTIAL_MODEL_CALLS="1"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 ```
@@ -127,32 +127,22 @@ The `config.yaml` file contains the model routing configuration. It maps friendl
 
 **Supported model names:**
 
-**Claude** — SAP AI Core naming convention `anthropic--claude-<version>-<tier>` (real Copilot backends, require VPN):
-- **Opus:** `anthropic--claude-4.8-opus` → `claude-opus-4.8`; also `anthropic--claude-4.8-opus-fast`, `anthropic--claude-4.7-opus`, `anthropic--claude-4.5-opus`, `anthropic--claude-5-opus`
-- **Sonnet:** `anthropic--claude-4.5-sonnet`, `anthropic--claude-4.6-sonnet`, `anthropic--claude-5-sonnet`
-- **Haiku:** `anthropic--claude-4.5-haiku` (faster/cheaper tier)
-- **Fable:** `anthropic--claude-5-fable`
+> Model availability depends on your Copilot login. On the **business/enterprise seat** (`api.business.githubcopilot.com`) the working models are GPT-only (below). The Claude/Gemini aliases require the **personal** login + VPS tunnel — see [Using with the VPS tunnel](#connectivity--vps-tunnel).
 
-> Only the `anthropic--claude-*` names are registered for Anthropic models. Claude Code's own `claude-*` ids are not listed individually — they resolve through the `anthropic/*` wildcard (→ `claude-sonnet-4.5`).
+**OpenAI GPT (business seat):**
+- **`gpt-5.5`, `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.3-codex`** — Responses-API only; configured with `model_info: {mode: responses}` (see note below). Usable from Claude Code, pi/omp, and OpenAI clients.
+- `gpt-5-mini`, `gpt-4.1`, `gpt-4o`, `gpt-4o-mini` — standard chat/completions.
 
-**OpenAI GPT-5.x:**
-- `gpt-5.6-sol`, `gpt-5.6-luna`, `gpt-5.6-terra`
-- `gpt-5.5`, `gpt-5.4`, `gpt-5.4-mini`
-- `gpt-5.3-codex`, `gpt-5-mini`
-- `gpt-4`, `gpt-4o`, `gpt-4-turbo` → `gpt-5.5` (legacy aliases)
+**Claude** — SAP AI Core naming `anthropic--claude-<version>-<tier>` (personal login + tunnel):
+- `anthropic--claude-4.5-sonnet`/`-4.6-sonnet`/`-5-sonnet`, `anthropic--claude-4.5-haiku` (verified working). Opus/Fable aliases exist but their backends currently return `model_not_supported`.
 
-**Google Gemini:**
-- `gemini-3.6-flash`, `gemini-3.5-flash`, `gemini-3.1-pro-preview`, `gemini-3-flash-preview`, `gemini-2.5-pro`
+**Google Gemini** (personal login + tunnel): `gemini-3.6-flash`, `gemini-3.5-flash`, `gemini-3.1-pro-preview`, `gemini-3-flash-preview`, `gemini-2.5-pro`.
 
-**Other:**
-- `grok-4.5`
-- `kimi-k2.7-code` (requires VPN)
+**Wildcards:** `anthropic/*` → `claude-sonnet-4.5`, `openai/*` → `gpt-4.1`
 
-**Wildcards:**
-- `anthropic/*` → `claude-sonnet-4.5`
-- `openai/*` → `gpt-5.5`
+> **Responses-API models** (`gpt-5.5`/`5.4`/`5.4-mini`/`5.3-codex`): these are served only via Copilot's `/responses` endpoint. Their config entries set `model_info: {mode: responses}` and carry **no `extra_headers`** (a `Copilot-Integration-Id` header collides with litellm's default and returns `400 unknown Copilot-Integration-Id`). litellm bridges them onto `/v1/messages`, `/v1/chat/completions`, and `/v1/responses`. Restart the proxy after any config change — litellm loads config once at startup.
 
-The `extra_headers` are required by the GitHub Copilot API for proper authentication.
+The `extra_headers` on the non-responses entries are required by the GitHub Copilot API for authentication.
 
 ### Environment Variables
 
@@ -161,8 +151,8 @@ Alternatively, you can set these as environment variables instead of using setti
 ```bash
 export ANTHROPIC_BASE_URL="http://127.0.0.1:4000"
 export ANTHROPIC_AUTH_TOKEN="your-anthropic-api-key-here"
-export ANTHROPIC_MODEL="anthropic--claude-4.8-opus"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic--claude-4.5-haiku"
+export ANTHROPIC_MODEL="gpt-5.5"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="gpt-5-mini"
 export DISABLE_NON_ESSENTIAL_MODEL_CALLS="1"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 ```
@@ -170,8 +160,8 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 **Environment Variable Details:**
 - `ANTHROPIC_BASE_URL`: Points to the local LiteLLM proxy (use 127.0.0.1 or localhost)
 - `ANTHROPIC_AUTH_TOKEN`: Dummy token (auth is disabled for local use, but Claude Code requires a value)
-- `ANTHROPIC_MODEL`: Primary model to use (`anthropic--claude-4.8-opus`, routed to `claude-opus-4.8`)
-- `ANTHROPIC_DEFAULT_HAIKU_MODEL`: Faster model for simple operations (`anthropic--claude-4.5-haiku`, routed to `claude-haiku-4.5`)
+- `ANTHROPIC_MODEL`: Primary model to use (`gpt-5.5` on the business seat, routed via Copilot's Responses API)
+- `ANTHROPIC_DEFAULT_HAIKU_MODEL`: Faster model for simple operations (`gpt-5-mini`)
 - `DISABLE_NON_ESSENTIAL_MODEL_CALLS`: Reduces unnecessary API calls
 - `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`: Further optimizes traffic
 
@@ -219,13 +209,24 @@ Press `Ctrl+C` in the terminal running the proxy server.
 
 ### Enable debugging
 
-Edit `config.yaml` and set:
+For full request/response tracing, edit `config.yaml` and set:
 ```yaml
 litellm_settings:
   set_verbose: True
 ```
 
-This will show detailed logs of all requests. Restart the proxy after changes.
+For concise per-request diagnostics instead (model, resolved `api_base`,
+`copilot-integration-id` header, and full failure details), the config ships
+with a custom logging callback:
+```yaml
+litellm_settings:
+  callbacks: proxy_logging.copilot_logger   # defined in proxy_logging.py
+```
+It prints `[GHPROXY request]` and `[GHPROXY FAILURE]` lines to the proxy's
+stderr — handy for tracing intermittent Copilot errors (e.g. an occasional
+`unknown Copilot-Integration-Id` 400 during token refresh, which Claude Code
+retries through). The start scripts set `PYTHONPATH=.` so the module is
+importable. Restart the proxy after any config change.
 
 ## Advanced Configuration
 
