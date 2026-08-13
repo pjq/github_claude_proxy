@@ -150,16 +150,23 @@ model_list:
         Copilot-Integration-Id: "vscode-chat"
 
   # ─── Other ──────────────────────────────────────────────────────────────
+  # grok-4.5 is Responses-API only (chat/completions → unsupported_api_for_model).
   - model_name: grok-4.5
     litellm_params:
       model: github_copilot/grok-4.5
-      extra_headers:
-        editor-version: "vscode/1.85.1"
-        Copilot-Integration-Id: "vscode-chat"
+    model_info:
+      mode: responses
 
   - model_name: kimi-k2.7-code
     litellm_params:
       model: github_copilot/kimi-k2.7-code
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  - model_name: kimi-k3
+    litellm_params:
+      model: github_copilot/kimi-k3
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
